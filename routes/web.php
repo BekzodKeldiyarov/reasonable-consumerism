@@ -22,5 +22,5 @@ Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('ho
 //Route::get('/admin/index', [App\Http\Controllers\HomeController::class, 'index'])->name('admin.index');
 
 Route::middleware('auth')->group(function () {
-    Route::get("/admin", [App\Http\Controllers\AdminsController::class, 'index'])->name('admin.index');
+    Route::get("/admin", [App\Http\Controllers\AdminController::class, 'index'])->name('admin.index');
 });
