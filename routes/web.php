@@ -35,4 +35,11 @@ Route::get('/goods/bottle/new', [App\Http\Controllers\GoodController::class, 'cr
 Route::post('/goods/bottle/new', [App\Http\Controllers\GoodController::class, 'storeBottle'])->name('goods.bottle.store');
 Route::get('/goods/bottle/{bottle}/edit', [App\Http\Controllers\GoodController::class, 'editBottle'])->name('goods.bottle.edit');
 Route::patch('/goods/bottle/update', [App\Http\Controllers\GoodController::class, 'updateBottle'])->name('goods.bottle.update');
+
+
+Route::get('/goods/packages/', [App\Http\Controllers\PackageController::class, 'index'])->name('packages.index');
+Route::get('/goods/packages/create', [App\Http\Controllers\PackageController::class, 'create'])->name('packages.create');
+Route::post('/goods/packages/create', [App\Http\Controllers\PackageController::class, 'store'])->name('packages.store');
+Route::get('/goods/packages/{package}/edit', [App\Http\Controllers\PackageController::class, 'edit'])->name('packages.edit');
+Route::patch('/goods/packages/update', [App\Http\Controllers\PackageController::class, 'update'])->name('packages.update');
 //});
