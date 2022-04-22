@@ -5,11 +5,14 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Good extends Model
+class Plastic extends Good
 {
     use HasFactory;
 
     protected $fillable = [
-        'label'
+        'good_id',
+        'biodigration_time',
+        'toxic_spread_emission',
+        'polyethylene_density'
     ];
 }

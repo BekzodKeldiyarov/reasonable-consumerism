@@ -17,7 +17,8 @@ class GoodFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'label' => $this->faker->name(),
         ];
+
     }
 }

@@ -40,7 +40,7 @@
                 </li>
                 @if(\Illuminate\Support\Facades\Auth::check())
                     <li class="nav-item">
-                        <a class="nav-link" href="{{route('admin.index')}}">Admin</a>
+                        <a class="nav-link" href="{{route('goods.index')}}">Admin</a>
                     </li>
                 @else
                     <li class="nav-item">

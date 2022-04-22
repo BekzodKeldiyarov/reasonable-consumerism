@@ -4,81 +4,107 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreGoodRequest;
 use App\Http\Requests\UpdateGoodRequest;
+use App\Models\Bottle;
 use App\Models\Good;
+use App\Models\Plastic;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class GoodController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
+//    public function __construct()
+//    {
+//        $this->middleware('auth');
+//    }
+
     public function index()
     {
-        //
+        $plastics = Plastic::all();
+        $goods = Good::all();
+        return view('admin.plastic.index', ['plastics' => $plastics, 'goods' => $goods]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
-        //
+        return view('admin.plastic.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \App\Http\Requests\StoreGoodRequest  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(StoreGoodRequest $request)
+    public function indexBottle()
     {
-        //
+        $goods = Good::all();
+        $bottles = Bottle::all();
+        $plastics = Plastic::all();
+        return view('admin.plastic.bottle.index', ['bottles' => $bottles, 'plastics' => $plastics, 'goods' => $goods]);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Good  $good
-     * @return \Illuminate\Http\Response
-     */
+    public function createBottle()
+    {
+        return view('admin.plastic.bottle.create');
+    }
+
+    public function store(Request $request)
+    {
+        $good['good_type'] = $request->good_type;
+        $good['label'] = $request->label;
+
+//        $id = DB::table('goods')->insertGetId(
+//            ['good_type' => $request->good_type, 'label' => $request->label]
+//        );
+
+        Good::insert($good);
+        $plastics = Plastic::all();
+        $goods = Good::all();
+        return view('admin.plastic.index', ['plastics' => $plastics, 'goods' => $goods]);
+    }
+
+    public function storeBottle(Request $request)
+    {
+//        $good['good_type'] = $request->good_type;
+//        $good['label'] = $request->label;
+        $label = strval($request->label);
+//        $id = DB::table('goods')->insertGetId(
+//            ['label' => $label]
+//        );
+        $good = Good::create(['label' => $request->label]);
+
+        $plastic['good_id'] = $good->id;
+        $plastic['biodigration_time'] = $request->biodigration_time;
+        $plastic['toxic_spread_emission'] = $request->toxic_spread_emission;
+        $plastic['polyethylene_density'] = $request->polyethylene_density;
+
+        Plastic::create($plastic);
+
+        $bottle['good_id'] = $good->id;
+        $bottle['volume'] = $request->volume;
+        Bottle::create($bottle);
+
+        return redirect()->route('goods.bottle.index');
+    }
+
+    public function editBottle()
+    {
+        return view('admin.plastic.bottle.edit');
+    }
+
+
     public function show(Good $good)
     {
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Good  $good
-     * @return \Illuminate\Http\Response
-     */
+
     public function edit(Good $good)
     {
-        //
+        return view('');
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \App\Http\Requests\UpdateGoodRequest  $request
-     * @param  \App\Models\Good  $good
-     * @return \Illuminate\Http\Response
-     */
     public function update(UpdateGoodRequest $request, Good $good)
     {
         //
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Good  $good
-     * @return \Illuminate\Http\Response
-     */
+
     public function destroy(Good $good)
     {
         //

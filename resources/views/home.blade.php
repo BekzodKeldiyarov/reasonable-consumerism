@@ -4,7 +4,7 @@
             <small>Secondary Text</small>
         </h1>
 
-{{--        @foreach($posts as $post)--}}
+{{--        @foreach($plastic as $post)--}}
 {{--        <!-- Blog Post -->--}}
 {{--            <div class="card mb-4">--}}
 {{--                <img class="card-img-top" src="{{$post->post_image}}" alt="Card image cap">--}}

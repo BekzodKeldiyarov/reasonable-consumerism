@@ -12,9 +12,12 @@ return new class extends Migration {
      */
     public function up()
     {
-        Schema::create('goods', function (Blueprint $table) {
-            $table->id();
-            $table->string('label');
+        Schema::create('plastics', function (Blueprint $table) {
+//            $table->id();
+            $table->foreignId('good_id')->references('id')->on('goods');
+            $table->string('biodigration_time');
+            $table->string('toxic_spread_emission');
+            $table->string('polyethylene_density');
             $table->timestamps();
         });
     }
@@ -26,6 +29,6 @@ return new class extends Migration {
      */
     public function down()
     {
-        Schema::dropIfExists('goods');
+        Schema::dropIfExists('plastics');
     }
 };
