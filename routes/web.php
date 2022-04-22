@@ -42,4 +42,10 @@ Route::get('/goods/packages/create', [App\Http\Controllers\PackageController::cl
 Route::post('/goods/packages/create', [App\Http\Controllers\PackageController::class, 'store'])->name('packages.store');
 Route::get('/goods/packages/{package}/edit', [App\Http\Controllers\PackageController::class, 'edit'])->name('packages.edit');
 Route::patch('/goods/packages/update', [App\Http\Controllers\PackageController::class, 'update'])->name('packages.update');
+
+Route::get('/goods/meats', [App\Http\Controllers\MeatController::class, 'index'])->name('meats.index');
+Route::get('/goods/meats/create', [App\Http\Controllers\MeatController::class, 'create'])->name('meats.create');
+Route::post('/goods/meats/create', [App\Http\Controllers\MeatController::class, 'store'])->name('meats.store');
+Route::get('/goods/meats/{meat}/edit', [App\Http\Controllers\MeatController::class, 'edit'])->name('meats.edit');
+Route::patch('/goods/meats/update', [App\Http\Controllers\MeatController::class, 'update'])->name('meats.update');
 //});
