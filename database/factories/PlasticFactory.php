@@ -19,7 +19,7 @@ class PlasticFactory extends Factory
     {
         $goods = Good::pluck('id')->toArray();
         return [
-            'good_id' => $this->faker->unique()->randomElement($goods),
+            'id' => $this->faker->unique()->randomElement($goods),
             'biodigration_time' => $this->faker->numberBetween(0, 15),
             'toxic_spread_emission' => $this->faker->numberBetween(0, 1000),
             'polyethylene_density' => $this->faker->numberBetween(10, 100)

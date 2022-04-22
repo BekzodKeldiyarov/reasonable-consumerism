@@ -45,30 +45,30 @@
                         <tbody>
                         @foreach($bottles as $bottle)
                             <tr>
-                                <td>{{$bottle->good_id}}</td>
+                                <td>{{$bottle->id}}</td>
                                 <td>
                                     @foreach($goods as $good)
-                                        @if($good->id==$bottle->good_id)
+                                        @if($good->id==$bottle->id)
                                             {{ $good-> label}}
                                         @endif
                                     @endforeach
                                 </td>
                                 <td>
                                     @foreach($plastics as $plastic)
-                                        @if($plastic->good_id==$bottle->good_id)
+                                        @if($plastic->id==$bottle->id)
                                             {{ $plastic-> biodigration_time}}
                                         @endif
                                     @endforeach
                                 </td>
                                 <td> @foreach($plastics as $plastic)
-                                        @if($plastic->good_id==$bottle->good_id)
+                                        @if($plastic->id==$bottle->id)
                                             {{ $plastic-> toxic_spread_emission}}
                                         @endif
                                     @endforeach
                                 </td>
                                 <td>
                                     @foreach($plastics as $plastic)
-                                        @if($plastic->good_id==$bottle->good_id)
+                                        @if($plastic->id==$bottle->id)
                                             {{ $plastic-> polyethylene_density}}
                                         @endif
                                     @endforeach
@@ -80,7 +80,7 @@
                                 <td>{{$plastic->updated_at->diffForHumans()}}</td>
                                 <td>
                                     <a class="btn btn-secondary"
-                                       href="{{route('goods.bottle.edit', $bottle->post_id)}}">Update</a>
+                                       href="{{route('goods.bottle.edit', $bottle->id)}}">Update</a>
                                 </td>
                                 <td>
                                     <form method="post" action="">

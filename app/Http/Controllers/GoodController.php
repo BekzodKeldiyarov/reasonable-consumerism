@@ -68,23 +68,50 @@ class GoodController extends Controller
 //        );
         $good = Good::create(['label' => $request->label]);
 
-        $plastic['good_id'] = $good->id;
+        $plastic['id'] = $good->id;
         $plastic['biodigration_time'] = $request->biodigration_time;
         $plastic['toxic_spread_emission'] = $request->toxic_spread_emission;
         $plastic['polyethylene_density'] = $request->polyethylene_density;
 
         Plastic::create($plastic);
 
-        $bottle['good_id'] = $good->id;
+        $bottle['id'] = $good->id;
         $bottle['volume'] = $request->volume;
         Bottle::create($bottle);
 
         return redirect()->route('goods.bottle.index');
     }
 
-    public function editBottle()
+    public function editBottle(Bottle $bottle)
     {
-        return view('admin.plastic.bottle.edit');
+
+        $good = Good::find($bottle->id);
+        $plastic = Plastic::find($bottle->id);
+
+        return view('admin.plastic.bottle.edit', ['bottle' => $bottle, 'good' => $good, 'plastic' => $plastic]);
+    }
+
+    public function updateBottle(Request $request)
+    {
+        $id = $request->id;
+        $good = Good::find($id);
+        $good->label = $request->label;
+        $good->updated_at = now();
+        $good->save();
+
+        $plastic = Plastic::find($id);
+        $plastic->biodigration_time = $request->biodigration_time;
+        $plastic->toxic_spread_emission = $request->toxic_spread_emission;
+        $plastic->polyethylene_density = $request->polyethylene_density;
+
+        $plastic->save();
+
+        $bottle = Bottle::find($id);
+        $bottle->volume = $request->volume;
+        $bottle->save();
+
+
+        return redirect(route('goods.bottle.index'));
     }
 
 

@@ -33,6 +33,6 @@ Route::post('/goods/new', [App\Http\Controllers\GoodController::class, 'store'])
 Route::get('/goods/bottle/index', [App\Http\Controllers\GoodController::class, 'indexBottle'])->name('goods.bottle.index');
 Route::get('/goods/bottle/new', [App\Http\Controllers\GoodController::class, 'createBottle'])->name('goods.bottle.create');
 Route::post('/goods/bottle/new', [App\Http\Controllers\GoodController::class, 'storeBottle'])->name('goods.bottle.store');
-Route::get('goods/bottle/{post_id}/edit', [App\Http\Controllers\GoodController::class, 'editBottle'])->name('goods.bottle.edit');
-
+Route::get('/goods/bottle/{bottle}/edit', [App\Http\Controllers\GoodController::class, 'editBottle'])->name('goods.bottle.edit');
+Route::patch('/goods/bottle/update', [App\Http\Controllers\GoodController::class, 'updateBottle'])->name('goods.bottle.update');
 //});

@@ -10,7 +10,7 @@ class Plastic extends Good
     use HasFactory;
 
     protected $fillable = [
-        'good_id',
+        'id',
         'biodigration_time',
         'toxic_spread_emission',
         'polyethylene_density'

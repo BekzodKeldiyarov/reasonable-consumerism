@@ -43,9 +43,9 @@
                         <tbody>
                         @foreach($plastics as $plastic)
                             <tr>
-                                <td>{{$plastic->good_id}}</td>
+                                <td>{{$plastic->id}}</td>
                                 <td> @foreach($goods as $good)
-                                        @if($good->id==$plastic->good_id)
+                                        @if($good->id==$plastic->id)
                                             {{ $good-> label}}
                                         @endif
                                     @endforeach
@@ -60,7 +60,7 @@
                                 <td>{{$plastic->created_at->diffForHumans()}}</td>
                                 <td>{{$plastic->updated_at->diffForHumans()}}</td>
                                 <td><a class="btn btn-secondary"
-                                       href="{{route('goods.edit', $plastic->good_id)}}">Update</a></td>
+                                       href="{{route('goods.edit', $plastic->id)}}">Update</a></td>
                                 <td>
                                     <form method="post" action="">
                                         @csrf
@@ -116,10 +116,10 @@
                         <tbody>
                         @foreach($plastics as $plastic)
                             <tr>
-                                <td>{{$plastic->good_id}}</td>
+                                <td>{{$plastic->id}}</td>
                                 <td>{{get_class($plastic)}}</td>
                                 <td> @foreach($goods as $good)
-                                        @if($good->id==$plastic->good_id)
+                                        @if($good->id==$plastic->id)
                                             {{ $good-> label}}
                                         @endif
                                     @endforeach
@@ -134,7 +134,7 @@
                                 <td>{{$plastic->created_at->diffForHumans()}}</td>
                                 <td>{{$plastic->updated_at->diffForHumans()}}</td>
                                 <td><a class="btn btn-secondary"
-                                       href="{{route('goods.edit', $plastic->good_id)}}">Update</a></td>
+                                       href="{{route('goods.edit', $plastic->id)}}">Update</a></td>
                                 <td>
                                     <form method="post" action="">
                                         @csrf

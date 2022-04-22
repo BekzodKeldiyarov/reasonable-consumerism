@@ -14,7 +14,7 @@ return new class extends Migration {
     {
         Schema::create('plastics', function (Blueprint $table) {
 //            $table->id();
-            $table->foreignId('good_id')->references('id')->on('goods');
+            $table->foreignId('id')->references('id')->on('goods');
             $table->string('biodigration_time');
             $table->string('toxic_spread_emission');
             $table->string('polyethylene_density');

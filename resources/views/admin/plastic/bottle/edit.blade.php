@@ -1,34 +1,38 @@
 <x-admin-master>
     @section('content')
-        <h1>Add new bottle</h1>
+        <h1>Edit bottle - {{$bottle->id}}</h1>
 
-        <form action="{{route('goods.bottle.edit')}}" method="post">
+        <form
+            action="{{route('goods.bottle.update')}}"
+            method="post">
             @csrf
+            @method('PATCH')
             <div class="row">
                 <div class="col-md-6">
                     <div class="form-group">
+                        <input type="hidden" name="id" value="{{$bottle->id}}">
                         <label for="title">Label</label>
                         <input id="title" name="label" type="text" class="form-control"
-                               placeholder="Enter label of product">
+                               placeholder="Enter label of product" value="{{$good->label}}">
                     </div>
                     <div class="form-group">
                         <label for="biodigration_time">Enter Biodigration time</label>
                         <input id="biodigration_time" name="biodigration_time" type="text" class="form-control"
-                               placeholder="1 year">
+                               placeholder="1 year" value="{{$plastic->biodigration_time}}">
                     </div>
                     <div class="form-group">
                         <label for="toxic_spread_emission">Toxic emission</label>
                         <input id="toxic_spread_emission" name="toxic_spread_emission" type="text" class="form-control"
-                               placeholder="">
+                               placeholder="" value="{{$plastic->toxic_spread_emission}}">
                     </div>
                     <div class="form-group">
                         <label for="polyethylene_density">Polyethylene</label>
                         <input id="polyethylene_density" name="polyethylene_density" type="text" class="form-control"
-                               placeholder="">
+                               placeholder="" value="{{$plastic->polyethylene_density}}">
                     </div>
                     <div class="form-group">
                         <label for="volume">Volume</label>
-                        <input id="volume" name="volume" type="text" class="form-control">
+                        <input id="volume" name="volume" type="text" class="form-control" value="{{$bottle->volume}}">
                     </div>
                 </div>
             </div>
