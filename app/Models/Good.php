@@ -12,4 +12,9 @@ class Good extends Model
     protected $fillable = [
         'label'
     ];
+
+    public function users()
+    {
+        return $this->belongsToMany(User::class);
+    }
 }

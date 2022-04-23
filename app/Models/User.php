@@ -68,4 +68,9 @@ class User extends Authenticatable
         }
         return false;
     }
+
+    public function goods()
+    {
+        return $this->belongsToMany(Good::class);
+    }
 }
