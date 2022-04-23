@@ -19,6 +19,7 @@ require __DIR__ . '/auth.php';
 Auth::routes();
 
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/dashboard', [App\Http\Controllers\HomeController::class, 'dashboard'])->name('dashboard');
 //Route::get('/admin/index', [App\Http\Controllers\HomeController::class, 'index'])->name('admin.index');
 
 //Route::middleware('auth')->group(function () {
@@ -48,4 +49,7 @@ Route::get('/goods/meats/create', [App\Http\Controllers\MeatController::class, '
 Route::post('/goods/meats/create', [App\Http\Controllers\MeatController::class, 'store'])->name('meats.store');
 Route::get('/goods/meats/{meat}/edit', [App\Http\Controllers\MeatController::class, 'edit'])->name('meats.edit');
 Route::patch('/goods/meats/update', [App\Http\Controllers\MeatController::class, 'update'])->name('meats.update');
+
+
+Route::get('admin/users/{user}/profile', [App\Http\Controllers\UserController::class, 'show'])->name('users.profile.show');
 //});
