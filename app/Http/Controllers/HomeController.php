@@ -11,7 +11,9 @@ use App\Models\Plastic;
 use App\Models\PrivateTransport;
 use App\Models\PublicTransport;
 use App\Models\Transport;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller
 {
@@ -37,6 +39,7 @@ class HomeController extends Controller
 
     public function dashboard()
     {
+
 
         return view('admin.index', ['bottles' => Bottle::all(), 'packages' => Package::all(), 'goods' => Good::all(), 'plastics' => Plastic::all(), 'meats' => Meat::all(), 'transports' => Transport::all(), 'privates' => PrivateTransport::all(), 'publics' => PublicTransport::all(), 'alternatives' => AlternativeTransport::all()]);
     }

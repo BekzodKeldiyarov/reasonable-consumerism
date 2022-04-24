@@ -96,7 +96,7 @@ class ConsumerController extends Controller
             ->where('good_id', $request->good_id)
             ->where('consume_date', $request->consume_date)->first();
 
-        return view('admin.consumes.bottles.edit', ['consume' => $consume, 'bottles' => Bottle::all(), 'goods' => Good::all()]);
+        return view('admin.consumes.bottles.edit', ['consume' => $consume, 'packages' => Package::all(), 'goods' => Good::all()]);
     }
 
     public function updatePackageConsume(Request $request)

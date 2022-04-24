@@ -72,9 +72,9 @@ var myBarChart = new Chart(ctx, {
           maxTicksLimit: 5,
           padding: 10,
           // Include a dollar sign in the ticks
-          callback: function(value, index, values) {
-            return '$' + number_format(value);
-          }
+          // callback: function(value, index, values) {
+          //   return '$' + number_format(value);
+          // }
         },
         gridLines: {
           color: "rgb(234, 236, 244)",

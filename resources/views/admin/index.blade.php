@@ -105,7 +105,7 @@
                                         <td>{{$good->pivot->consume_date}}</td>
                                         <td>{{$good->pivot->amount}}</td>
                                         <td>
-                                            <a href="{{route('consumes.bottle.edit', ['good_id'=>$good->id, 'consume_date'=>$good->pivot->consume_date])}}"
+                                            <a href="{{route('consumes.package.edit', ['good_id'=>$good->id, 'consume_date'=>$good->pivot->consume_date])}}"
                                                class="btn btn-primary">Update</a>
                                         </td>
                                         <td>
@@ -392,34 +392,63 @@
 
     @section('charts')
         <div class="container-fluid">
-
+            <div class="d-none visually-hidden">
+                {{$private_count = 0}}
+                {{$public_count = 0}}
+                {{$alternative_count = 0}}
+            </div>
+            <div class="d-none">
+                @foreach(auth()->user()->transports as $transport)
+                @foreach($privates as $private)
+                @if($transport->id==$private->id)
+                {{$private_count++}}
+                @endif
+                @endforeach
+                @foreach($publics as $private)
+                @if($transport->id==$private->id)
+                {{$public_count++}}
+                @endif
+                @endforeach
+                @foreach($alternatives as $alternative)
+                @if($transport->id==$alternative->id)
+                {{$alternative_count++}}
+                @endif
+                @endforeach
+                @endforeach
+                </h2>
+            </div>
+            <div class="d-none">
+                <span id="private">{{$private_count}}</span>
+                <span id="public">{{$public_count}}</span>
+                <span id="alternative">{{$alternative_count}}</span>
+            </div>
             <!-- Page Heading -->
-            <h1 class="h3 mb-2 text-gray-800">Charts</h1>
-            <p class="mb-4">Chart.js is a third party plugin that is used to generate the charts in this theme. The
-                charts below have been customized - for further customization options, please visit the <a
-                    target="_blank" href="https://www.chartjs.org/docs/latest/">official Chart.js documentation</a>.</p>
+        {{--            <h1 class="h3 mb-2 text-gray-800">Charts</h1>--}}
+        {{--            <p class="mb-4">Chart.js is a third party plugin that is used to generate the charts in this theme. The--}}
+        {{--                charts below have been customized - for further customization options, please visit the <a--}}
+        {{--                    target="_blank" href="https://www.chartjs.org/docs/latest/">official Chart.js documentation</a>.</p>--}}
 
-            <!-- Content Row -->
+        <!-- Content Row -->
             <div class="row">
 
                 <div class="col-xl-8 col-lg-7">
 
                     <!-- Area Chart -->
-                    <div class="card shadow mb-4">
-                        <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary">Area Chart</h6>
-                        </div>
-                        <div class="card-body">
-                            <div class="chart-area">
-                                <canvas id="myAreaChart"></canvas>
-                            </div>
-                            <hr>
-                            Styling for the area chart can be found in the <code>/js/demo/chart-area-demo.js</code>
-                            file.
-                        </div>
-                    </div>
+                {{--                    <div class="card shadow mb-4">--}}
+                {{--                        <div class="card-header py-3">--}}
+                {{--                            <h6 class="m-0 font-weight-bold text-primary">Area Chart</h6>--}}
+                {{--                        </div>--}}
+                {{--                        <div class="card-body">--}}
+                {{--                            <div class="chart-area">--}}
+                {{--                                <canvas id="myAreaChart"></canvas>--}}
+                {{--                            </div>--}}
+                {{--                            <hr>--}}
+                {{--                            Styling for the area chart can be found in the <code>/js/demo/chart-area-demo.js</code>--}}
+                {{--                            file.--}}
+                {{--                        </div>--}}
+                {{--                    </div>--}}
 
-                    <!-- Bar Chart -->
+                <!-- Bar Chart -->
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
                             <h6 class="m-0 font-weight-bold text-primary">Bar Chart</h6>
@@ -429,7 +458,6 @@
                                 <canvas id="myBarChart"></canvas>
                             </div>
                             <hr>
-                            Styling for the bar chart can be found in the <code>/js/demo/chart-bar-demo.js</code> file.
                         </div>
                     </div>
 
@@ -440,7 +468,7 @@
                     <div class="card shadow mb-4">
                         <!-- Card Header - Dropdown -->
                         <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary">Donut Chart</h6>
+                            <h6 class="m-0 font-weight-bold text-primary">Transport Usage</h6>
                         </div>
                         <!-- Card Body -->
                         <div class="card-body">
@@ -448,8 +476,7 @@
                                 <canvas id="myPieChart"></canvas>
                             </div>
                             <hr>
-                            Styling for the donut chart can be found in the <code>/js/demo/chart-pie-demo.js</code>
-                            file.
+                            Distribution of transport usage
                         </div>
                     </div>
                 </div>
