@@ -2,7 +2,9 @@
 
 namespace Database\Seeders;
 
+use App\Models\Bottle;
 use App\Models\Good;
+use App\Models\Package;
 use App\Models\Plastic;
 use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
@@ -17,8 +19,10 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        Good::factory()->count(5)->create();
-        Plastic::factory()->count(5)->create();
-        User::factory()->count(10)->create();
+//        Good::factory()->count(30)->create();
+//        Plastic::factory()->count(20)->create();
+//        Bottle::factory()->count(3)->create();
+        Package::factory()->count(10)->create();
+//        User::factory()->count(10)->create();
     }
 }

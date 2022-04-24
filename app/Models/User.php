@@ -71,6 +71,6 @@ class User extends Authenticatable
 
     public function goods()
     {
-        return $this->belongsToMany(Good::class);
+        return $this->belongsToMany(Good::class, 'consume')->withPivot('consume_date', 'amount');
     }
 }

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ConsumerController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -24,20 +25,45 @@ Route::get('/dashboard', [App\Http\Controllers\HomeController::class, 'dashboard
 //Route::get('/admin/index', [App\Http\Controllers\HomeController::class, 'index'])->name('admin.index');
 
 Route::middleware('auth')->group(function () {
+
+    Route::get('admin/users/{user}/profile', [UserController::class, 'show'])->name('users.profile.show');
+
+//Route::get('admin/users', [UserController::class, 'index'])->name('users.index');
+    Route::delete('admin/{user}/destroy', [UserController::class, 'destroy'])->name('users.destroy');
+
+    Route::get('/consume/bottle/create', [ConsumerController::class, 'addBottleConsume'])->name('consumes.bottle.new');
+    Route::post('/consume/bottle/store', [ConsumerController::class, 'storeBottleConsume'])->name('consumes.bottle.store');
+    Route::get('/consumes/bottle/edit', [ConsumerController::class, 'editBottleConsume'])->name('consumes.bottle.edit');
+    Route::patch('/consumes/bottle/update', [ConsumerController::class, 'updateBottleConsume'])->name('consumes.bottle.update');
+    Route::delete('/consume/bottle/destroy', [ConsumerController::class, 'destroyBottleConsume'])->name('consumes.bottle.destroy');
+
+    Route::get('/consume/package/create', [ConsumerController::class, 'addPackageConsume'])->name('consumes.package.new');
+    Route::post('/consume/package/store', [ConsumerController::class, 'storePackageConsume'])->name('consumes.package.store');
+    Route::get('/consumes/package]/edit', [ConsumerController::class, 'editPackageConsume'])->name('consumes.package.edit');
+    Route::patch('/consumes/package/update', [ConsumerController::class, 'updatePackageConsume'])->name('consumes.package.update');
+    Route::delete('/consume/package/destroy', [ConsumerController::class, 'destroyPackageConsume'])->name('consumes.package.destroy');
+
+    Route::get('/consume/meat/create', [ConsumerController::class, 'addMeatConsume'])->name('consumes.meat.new');
+    Route::post('/consume/meat/store', [ConsumerController::class, 'storeMeatConsume'])->name('consumes.meat.store');
+    Route::get('/consumes/meat]/edit', [ConsumerController::class, 'editMeatConsume'])->name('consumes.meat.edit');
+    Route::patch('/consumes/meat/update', [ConsumerController::class, 'updateMeatConsume'])->name('consumes.meat.update');
+    Route::delete('/consume/meat/destroy', [ConsumerController::class, 'destroyMeatConsume'])->name('consumes.meat.destroy');
+});
+
+Route::middleware('role:ADMIN')->group(function () {
     Route::get("/goods", [App\Http\Controllers\GoodController::class, 'index'])->name('goods.index');
     Route::get('/admin/plastic', [\App\Http\Controllers\PlasticController::class, 'index'])->name('plastic.index');
     Route::get('/admin/{good}/edit', [\App\Http\Controllers\GoodController::class, 'edit'])->name('goods.edit');
 
     Route::get('/goods/new', [App\Http\Controllers\GoodController::class, 'create'])->name('goods.create');
-
     Route::post('/goods/new', [App\Http\Controllers\GoodController::class, 'store'])->name('goods.store');
+
 
     Route::get('/goods/bottle/index', [App\Http\Controllers\GoodController::class, 'indexBottle'])->name('goods.bottle.index');
     Route::get('/goods/bottle/new', [App\Http\Controllers\GoodController::class, 'createBottle'])->name('goods.bottle.create');
     Route::post('/goods/bottle/new', [App\Http\Controllers\GoodController::class, 'storeBottle'])->name('goods.bottle.store');
     Route::get('/goods/bottle/{bottle}/edit', [App\Http\Controllers\GoodController::class, 'editBottle'])->name('goods.bottle.edit');
     Route::patch('/goods/bottle/update', [App\Http\Controllers\GoodController::class, 'updateBottle'])->name('goods.bottle.update');
-
 
     Route::get('/goods/packages/', [App\Http\Controllers\PackageController::class, 'index'])->name('packages.index');
     Route::get('/goods/packages/create', [App\Http\Controllers\PackageController::class, 'create'])->name('packages.create');
@@ -52,12 +78,5 @@ Route::middleware('auth')->group(function () {
     Route::patch('/goods/meats/update', [App\Http\Controllers\MeatController::class, 'update'])->name('meats.update');
 
 
-    Route::get('admin/users/{user}/profile', [UserController::class, 'show'])->name('users.profile.show');
-
-//Route::get('admin/users', [UserController::class, 'index'])->name('users.index');
-    Route::delete('admin/{user}/destroy', [UserController::class, 'destroy'])->name('users.destroy');
-});
-
-Route::middleware('role:ADMIN')->group(function () {
     Route::get('admin/users', [UserController::class, 'index'])->name('users.index');
 });

@@ -18,7 +18,6 @@ return new class extends Migration {
             $table->foreignId('good_id')->constrained()->onDelete('cascade');
             $table->date('consume_date');
             $table->integer('amount');
-            $table->timestamps();
         });
     }
 

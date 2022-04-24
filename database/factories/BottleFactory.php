@@ -2,13 +2,14 @@
 
 namespace Database\Factories;
 
+use App\Models\Good;
 use App\Models\Plastic;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Package>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Plastic>
  */
-class PackageFactory extends Factory
+class BottleFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -20,7 +21,7 @@ class PackageFactory extends Factory
         $plastics = Plastic::pluck('id')->toArray();
         return [
             'id' => $this->faker->unique()->randomElement($plastics),
-            'size' => $this->faker->numberBetween(0, 15),
+            'volume' => $this->faker->numberBetween(0, 15),
         ];
     }
 }

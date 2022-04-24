@@ -2,6 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Bottle;
+use App\Models\Good;
+use App\Models\Meat;
+use App\Models\Package;
+use App\Models\Plastic;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -23,11 +28,12 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        return view('admin.index');
     }
 
     public function dashboard()
     {
-        return view('admin.index');
+
+        return view('admin.index', ['bottles' => Bottle::all(), 'packages' => Package::all(), 'goods' => Good::all(), 'plastics' => Plastic::all(), 'meats' => Meat::all()]);
     }
 }
