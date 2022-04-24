@@ -186,6 +186,207 @@
                 </div>
             </div>
         </div>
+
+        <div class="card shadow mb-4">
+            <div class="card-header py-3">
+                <div class="d-flex justify-content-between align-items-center">
+                    <h6 class="m-0 font-weight-bold text-primary">Private Transports Record</h6>
+                    <a href="{{route('goby.private.new')}}" class="btn btn-outline-primary">Record New Travel</a>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                        <thead>
+                        <tr>
+                            <th>Private Transport Type</th>
+                            <th>Travel Start Time</th>
+                            <th>Duration</th>
+                            <th>Update</th>
+                            <th>Delete</th>
+                        </tr>
+                        </thead>
+                        <tfoot>
+                        <tr>
+                            <th>Product Name</th>
+                            <th>Consume Date</th>
+                            <th>Duration</th>
+                            <th>Update</th>
+                            <th>Delete</th>
+                        </tr>
+                        </tfoot>
+                        <tbody>
+                        @foreach(auth()->user()->transports as $transport)
+                            @foreach($privates as $private)
+                                @if($transport->id==$private->id)
+                                    <tr>
+                                        <td>
+                                            @foreach($privates as $private)
+                                                @if($transport->id==$private->id)
+                                                    {{Illuminate\Support\Str::ucfirst($private->type)}}
+                                                @endif
+                                            @endforeach
+                                        </td>
+                                        <td>{{$transport->pivot->start_time}}</td>
+                                        <td>
+                                            {{$transport->pivot->duration_time}}
+                                        </td>
+                                        <td>
+                                            <a class="btn btn-primary"
+                                               href="{{route('goby.private.edit', ['user_id'=>auth()->user()->id, 'transport_id'=>$transport->id, 'start_time'=>$transport->pivot->start_time])}}">Update</a>
+                                        </td>
+                                        <td>
+                                            <form method="post"
+                                                  action="{{route('goby.private.destroy', ['user_id'=>auth()->user()->id, 'transport_id'=>$transport->id, 'start_time'=>$transport->pivot->start_time])}}">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" class="btn btn-danger" href="">Delete</button>
+                                            </form>
+
+                                        </td>
+                                    </tr>
+                                @endif
+                            @endforeach
+                        @endforeach
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div class="card shadow mb-4">
+            <div class="card-header py-3">
+                <div class="d-flex justify-content-between align-items-center">
+                    <h6 class="m-0 font-weight-bold text-primary">Public Transports Record</h6>
+                    <a href="{{route('goby.public.new')}}" class="btn btn-outline-primary">Record New Travel</a>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                        <thead>
+                        <tr>
+                            <th>Public Transport Type</th>
+                            <th>Travel Start Time</th>
+                            <th>Duration</th>
+                            <th>Update</th>
+                            <th>Delete</th>
+                        </tr>
+                        </thead>
+                        <tfoot>
+                        <tr>
+                            <th>Public Transport Type</th>
+                            <th>Travel Start Time</th>
+                            <th>Duration</th>
+                            <th>Update</th>
+                            <th>Delete</th>
+                        </tr>
+                        </tfoot>
+                        <tbody>
+                        @foreach(auth()->user()->transports as $transport)
+                            @foreach($publics as $public)
+                                @if($transport->id==$public->id)
+                                    <tr>
+                                        <td>
+                                            @foreach($publics as $public)
+                                                @if($transport->id==$public->id)
+                                                    {{Illuminate\Support\Str::ucfirst($public->type)}}
+                                                @endif
+                                            @endforeach
+                                        </td>
+                                        <td>{{$transport->pivot->start_time}}</td>
+                                        <td>
+                                            {{$transport->pivot->duration_time}}
+                                        </td>
+                                        <td>
+                                            <a class="btn btn-primary"
+                                               href="{{route('goby.public.edit', ['user_id'=>auth()->user()->id, 'transport_id'=>$transport->id, 'start_time'=>$transport->pivot->start_time])}}">Update</a>
+                                        </td>
+                                        <td>
+                                            <form method="post"
+                                                  action="{{route('goby.public.destroy', ['user_id'=>auth()->user()->id, 'transport_id'=>$transport->id, 'start_time'=>$transport->pivot->start_time])}}">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" class="btn btn-danger" href="">Delete</button>
+                                            </form>
+
+                                        </td>
+                                    </tr>
+                                @endif
+                            @endforeach
+                        @endforeach
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div class="card shadow mb-4">
+            <div class="card-header py-3">
+                <div class="d-flex justify-content-between align-items-center">
+                    <h6 class="m-0 font-weight-bold text-primary">Alternative Transports Record</h6>
+                    <a href="{{route('alternative.new')}}" class="btn btn-outline-primary">Record New Travel</a>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                        <thead>
+                        <tr>
+                            <th>Public Transport Type</th>
+                            <th>Travel Start Time</th>
+                            <th>Duration</th>
+                            <th>Update</th>
+                            <th>Delete</th>
+                        </tr>
+                        </thead>
+                        <tfoot>
+                        <tr>
+                            <th>Public Transport Type</th>
+                            <th>Travel Start Time</th>
+                            <th>Duration</th>
+                            <th>Update</th>
+                            <th>Delete</th>
+                        </tr>
+                        </tfoot>
+                        <tbody>
+                        @foreach(auth()->user()->transports as $transport)
+                            @foreach($alternatives as $alternative)
+                                @if($transport->id==$alternative->id)
+                                    <tr>
+                                        <td>
+                                            @foreach($alternatives as $alternative)
+                                                @if($transport->id==$alternative->id)
+                                                    Alternative Transport
+                                                @endif
+                                            @endforeach
+                                        </td>
+                                        <td>{{$transport->pivot->start_time}}</td>
+                                        <td>
+                                            {{$transport->pivot->duration_time}}
+                                        </td>
+                                        <td>
+                                            <a class="btn btn-primary"
+                                               href="{{route('alternative.edit', ['user_id'=>auth()->user()->id, 'transport_id'=>$transport->id, 'start_time'=>$transport->pivot->start_time , 'duration_time'=>$transport->pivot->duration_time])}}">Update</a>
+                                        </td>
+                                        <td>
+                                            <form method="post"
+                                                  action="{{route('alternative.destroy', ['user_id'=>auth()->user()->id, 'transport_id'=>$transport->id, 'start_time'=>$transport->pivot->start_time])}}">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" class="btn btn-danger" href="">Delete</button>
+                                            </form>
+
+                                        </td>
+                                    </tr>
+                                @endif
+                            @endforeach
+                        @endforeach
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
     @endsection
 
 

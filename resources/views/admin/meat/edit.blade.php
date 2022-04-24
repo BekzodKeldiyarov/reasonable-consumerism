@@ -23,8 +23,8 @@
                     <div class="form-group">
                         <label for="meat_type">Meat type</label>
                         <select class="custom-select" id="meat_type" name="meat_type">
-                            <option value="govyadina" selected>Govyadina</option>
-                            <option value="baranina">Baranina</option>
+                            <option value="beef" selected>Beef</option>
+                            <option value="lamp">Lamp</option>
                         </select>
                     </div>
                 </div>

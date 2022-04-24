@@ -6,6 +6,7 @@ use App\Http\Requests\StoreGoodRequest;
 use App\Http\Requests\UpdateGoodRequest;
 use App\Models\Bottle;
 use App\Models\Good;
+use App\Models\Meat;
 use App\Models\Plastic;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -132,8 +133,10 @@ class GoodController extends Controller
     }
 
 
-    public function destroy(Good $good)
+    public function destroy(Request $request)
     {
-        //
+        Bottle::find($request->id)->delete();
+        return redirect(route('goods.bottle.index'));
     }
+
 }

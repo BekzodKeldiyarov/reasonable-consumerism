@@ -73,4 +73,9 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(Good::class, 'consume')->withPivot('consume_date', 'amount');
     }
+
+    public function transports()
+    {
+        return $this->belongsToMany(Transport::class, 'go_by')->withPivot('start_time', 'duration_time');
+    }
 }

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StorePackageRequest;
 use App\Http\Requests\UpdatePackageRequest;
+use App\Models\Bottle;
 use App\Models\Good;
 use App\Models\Package;
 use App\Models\Plastic;
@@ -86,8 +87,9 @@ class PackageController extends Controller
     }
 
 
-    public function destroy(Package $package)
+    public function destroy(Request $request)
     {
-        //
+        Package::find($request->id)->delete();
+        return redirect(route('packages.index'));
     }
 }

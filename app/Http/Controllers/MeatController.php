@@ -72,8 +72,10 @@ class MeatController extends Controller
         return redirect(route('meats.index'));
     }
 
-    public function destroy(Meat $meat)
+    public function destroy(Request $request)
     {
-        //
+        $meat = Meat::find($request->id);
+        $meat->delete();
+        return redirect(route('meats.index'));
     }
 }

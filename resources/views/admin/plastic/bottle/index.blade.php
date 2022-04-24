@@ -1,6 +1,6 @@
 <x-admin-master>
     @section('content')
-        <h1>All posts</h1>
+        <h1>All Bottles</h1>
         @if(\Illuminate\Support\Facades\Session::has('message'))
             <div class="alert alert-danger"> {{\Illuminate\Support\Facades\Session::get('message')}}</div>
         @elseif(\Illuminate\Support\Facades\Session::has('message-success'))
@@ -83,30 +83,12 @@
                                        href="{{route('goods.bottle.edit', $bottle->id)}}">Update</a>
                                 </td>
                                 <td>
-                                    <form method="post" action="">
+                                    <form method="post" action="{{route('goods.bottle.destroy', ['id'=>$bottle->id])}}">
                                         @csrf
                                         @method('DELETE')
                                         <button type="submit" class="btn btn-danger">Delete</button>
                                     </form>
                                 </td>
-                                {{--                                <td>{{$plastic->biodigration_time}}</td>--}}
-                                {{--                                <td>--}}
-                                {{--                                    {{$plastic->toxic_spread_emission}}--}}
-                                {{--                                </td>--}}
-                                {{--                                <td>--}}
-                                {{--                                    {{$plastic->polyethylene_density}}--}}
-                                {{--                                </td>--}}
-                                {{--                                <td>{{$plastic->created_at->diffForHumans()}}</td>--}}
-                                {{--                                <td>{{$plastic->updated_at->diffForHumans()}}</td>--}}
-                                {{--                                <td><a class="btn btn-secondary"--}}
-                                {{--                                       href="{{route('goods.edit', $plastic->good_id)}}">Update</a></td>--}}
-                                {{--                                <td>--}}
-                                {{--                                    <form method="post" action="">--}}
-                                {{--                                        @csrf--}}
-                                {{--                                        @method('DELETE')--}}
-                                {{--                                        <button type="submit" class="btn btn-danger">Delete</button>--}}
-                                {{--                                    </form>--}}
-                                {{--                                </td>--}}
                             </tr>
                         @endforeach
                         </tbody>

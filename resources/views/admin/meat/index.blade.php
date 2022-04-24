@@ -1,6 +1,6 @@
 <x-admin-master>
     @section('content')
-        <h1>All posts</h1>
+        <h1>All Meats</h1>
         @if(\Illuminate\Support\Facades\Session::has('message'))
             <div class="alert alert-danger"> {{\Illuminate\Support\Facades\Session::get('message')}}</div>
         @elseif(\Illuminate\Support\Facades\Session::has('message-success'))
@@ -57,7 +57,7 @@
                                     <a class="btn btn-secondary" href="{{route('meats.edit', $meat->id)}}">Update</a>
                                 </td>
                                 <td>
-                                    <form method="post" action="">
+                                    <form method="post" action="{{route('meats.destroy', ['id'=>$meat->id])}}">
                                         @csrf
                                         @method('DELETE')
                                         <button type="submit" class="btn btn-danger">Delete</button>
