@@ -15,4 +15,6 @@ class Plastic extends Good
         'toxic_spread_emission',
         'polyethylene_density'
     ];
+
+    protected $dates = ['consume_date'];
 }

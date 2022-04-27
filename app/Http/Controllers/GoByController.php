@@ -44,6 +44,19 @@ class GoByController extends Controller
         return view('admin.consumes.private.edit', ['goby' => $goby, 'privates' => PrivateTransport::all(), 'transports' => Transport::all()]);
     }
 
+    public function updatePrivateGoBy(Request $request)
+    {
+        DB::table('go_by')
+            ->where('user_id', auth()->user()->id)
+            ->where('transport_id', $request->transport_id)
+            ->where('start_time', $request->start_time)
+            ->update(['transport_id' => $request->transport_id_new,
+                'start_time' => $request->start_time_new,
+                'duration_time' => $request->duration_time_new]);
+
+        return redirect('dashboard');
+    }
+
     public function destroyPrivateGoBy(Request $request)
     {
         $goby = DB::table('go_by')
@@ -83,8 +96,9 @@ class GoByController extends Controller
             ->where('transport_id', $request->transport_id)
             ->where('start_time', $request->start_time)->first();
 
-        return view('admin.consumes.private.edit', ['goby' => $goby, 'privates' => PrivateTransport::all(), 'transports' => Transport::all()]);
+        return view('admin.consumes.public.edit', ['goby' => $goby, 'publics' => PublicTransport::all(), 'transports' => Transport::all()]);
     }
+
 
     public function destroyPublicGoBy(Request $request)
     {

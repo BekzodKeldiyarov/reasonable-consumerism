@@ -39,11 +39,11 @@ Route::middleware('auth')->group(function () {
 //Route::get('admin/users', [UserController::class, 'index'])->name('users.index');
     Route::delete('admin/{user}/destroy', [UserController::class, 'destroy'])->name('users.destroy');
 
-    Route::get('/consume/bottle/create', [ConsumerController::class, 'addBottleConsume'])->name('consumes.bottle.new');
-    Route::post('/consume/bottle/store', [ConsumerController::class, 'storeBottleConsume'])->name('consumes.bottle.store');
+    Route::get('/consumes/bottle/create', [ConsumerController::class, 'addBottleConsume'])->name('consumes.bottle.new');
+    Route::post('/consumes/bottle/store', [ConsumerController::class, 'storeBottleConsume'])->name('consumes.bottle.store');
     Route::get('/consumes/bottle/edit', [ConsumerController::class, 'editBottleConsume'])->name('consumes.bottle.edit');
     Route::patch('/consumes/bottle/update', [ConsumerController::class, 'updateBottleConsume'])->name('consumes.bottle.update');
-    Route::delete('/consume/bottle/destroy', [ConsumerController::class, 'destroyBottleConsume'])->name('consumes.bottle.destroy');
+    Route::delete('/consumes/bottle/destroy', [ConsumerController::class, 'destroyBottleConsume'])->name('consumes.bottle.destroy');
 
     Route::get('/consume/package/create', [ConsumerController::class, 'addPackageConsume'])->name('consumes.package.new');
     Route::post('/consume/package/store', [ConsumerController::class, 'storePackageConsume'])->name('consumes.package.store');
@@ -66,7 +66,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/goby/public/create', [GoByController::class, 'addPublicGoBy'])->name('goby.public.new');
     Route::post('/goby/public/store', [GoByController::class, 'storePublicGoBy'])->name('goby.public.store');
     Route::get('/goby/public/edit', [GoByController::class, 'editPublicGoBy'])->name('goby.public.edit');
-    Route::patch('/goby/public/update', [GoByController::class, 'updatePublicGoBy'])->name('goby.public.update');
+    Route::patch('/goby/public/update', [GoByController::class, 'updatePrivateGoBy'])->name('goby.public.update');
     Route::delete('/goby/public/destroy', [GoByController::class, 'destroyPublicGoBy'])->name('goby.public.destroy');
 
     Route::get('/alternative/create', [AlternativeTransportController::class, 'create'])->name('alternative.new');

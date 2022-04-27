@@ -13,6 +13,8 @@ class Good extends Model
         'label'
     ];
 
+    protected $dates = ['consume_date'];
+
     public function users()
     {
         return $this->belongsToMany(User::class, 'consume');

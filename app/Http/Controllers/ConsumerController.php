@@ -49,7 +49,8 @@ class ConsumerController extends Controller
         DB::table('consume')
             ->where('user_id', auth()->user()->id)
             ->where('good_id', $request->good_id)
-            ->where('consume_date', $request->consume_date)->update(['amount' => $request->amount, 'consume_date' => $request->consume_date_new, 'good_id' => $request->good_id_new]);
+            ->where('consume_date', $request->consume_date)
+            ->update(['amount' => $request->amount, 'consume_date' => $request->consume_date_new, 'good_id' => $request->good_id_new]);
 
         return redirect('dashboard');
     }
@@ -96,7 +97,7 @@ class ConsumerController extends Controller
             ->where('good_id', $request->good_id)
             ->where('consume_date', $request->consume_date)->first();
 
-        return view('admin.consumes.bottles.edit', ['consume' => $consume, 'packages' => Package::all(), 'goods' => Good::all()]);
+        return view('admin.consumes.packages.edit', ['consume' => $consume, 'packages' => Package::all(), 'goods' => Good::all()]);
     }
 
     public function updatePackageConsume(Request $request)

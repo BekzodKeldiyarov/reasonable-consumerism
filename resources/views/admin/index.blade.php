@@ -6,6 +6,24 @@
             <h1 class="h3 mb-4 text-gray-800">Dashboard</h1>
             <h2>{{Illuminate\Support\Str::ucfirst(auth()->user()->name)}}</h2>
         @endif
+        @php
+            $total=0;
+            $mydate = '';
+            $values = array(
+                "01"=>0,
+                "02"=>0,
+                "03"=>0,
+                "04"=>0,
+                "05"=>0,
+                "06"=>0,
+                "07"=>0,
+                "08"=>0,
+                "09"=>0,
+                "10"=>0,
+                "11"=>0,
+                "12"=>0,
+            );
+        @endphp
         <div class="card shadow mb-4">
             <div class="card-header py-3">
                 <div class="d-flex justify-content-between align-items-center">
@@ -21,6 +39,10 @@
                             <th>Product Name</th>
                             <th>Consume Date</th>
                             <th>Amount</th>
+                            <td>Biodigration Time of one</td>
+                            <td>Spread Emission of one</td>
+                            <td>Polyethylene Density of one</td>
+                            <td>Volume</td>
                             <th>Update</th>
                             <th>Delete</th>
                         </tr>
@@ -30,20 +52,39 @@
                             <th>Product Name</th>
                             <th>Consume Date</th>
                             <th>Amount</th>
+                            <td>Biodigration Time of one</td>
+                            <td>Spread Emission of one</td>
+                            <td>Polyethylene Density of one</td>
+                            <td>Volume</td>
                             <th>Update</th>
                             <th>Delete</th>
                         </tr>
                         </tfoot>
                         <tbody>
+
                         @foreach(auth()->user()->goods as $good)
                             @foreach($bottles as $bottle)
                                 @if($good->id==$bottle->id)
                                     <tr>
                                         <td>
-                                            {{$good->label}}
+                                            {{$good->label}} {{$good->id}}
                                         </td>
-                                        <td>{{$good->pivot->consume_date}}</td>
-                                        <td>{{$good->pivot->amount}}</td>
+                                        <td>
+                                            {{$mydate = $good->pivot->consume_date}}
+                                        </td>
+                                        <td>
+                                            {{$good->pivot->amount}}
+                                        </td>
+                                        @foreach($plastics as $plastic)
+                                            @if($plastic->id==$good->id)
+                                                <td>{{$plastic->biodigration_time}}</td>
+                                                <td>{{$plastic->toxic_spread_emission}}</td>
+                                                <td>{{$plastic->polyethylene_density}}</td>
+                                                <td>{{$bottle->volume}}</td>
+                                                <span
+                                                    class="d-none">{{$total = $good->pivot->amount*($plastic->biodigration_time*$plastic->toxic_spread_emission/$plastic->polyethylene_density)}}</span>
+                                            @endif
+                                        @endforeach
                                         <td>
                                             <a href="{{route('consumes.bottle.edit', ['good_id'=>$good->id, 'consume_date'=>$good->pivot->consume_date])}}"
                                                class="btn btn-primary">Update</a>
@@ -57,6 +98,13 @@
                                                 <button class="btn btn-danger">Delete</button>
                                             </form>
                                         </td>
+
+                                        @php
+                                            if($mydate!=null){
+                                                $monthValue = DateTime::createFromFormat('Y-m-d', $mydate)->format('m');
+                                                $values[$monthValue] +=$total;
+                                                }
+                                        @endphp
                                     </tr>
                                 @endif
                             @endforeach
@@ -81,6 +129,10 @@
                             <th>Product Name</th>
                             <th>Consume Date</th>
                             <th>Amount</th>
+                            <td>Biodigration Time of one</td>
+                            <td>Spread Emission of one</td>
+                            <td>Polyethylene Density of one</td>
+                            <td>Size</td>
                             <th>Update</th>
                             <th>Delete</th>
                         </tr>
@@ -90,6 +142,10 @@
                             <th>Product Name</th>
                             <th>Consume Date</th>
                             <th>Amount</th>
+                            <td>Biodigration Time of one</td>
+                            <td>Spread Emission of one</td>
+                            <td>Polyethylene Density of one</td>
+                            <td>Volume</td>
                             <th>Update</th>
                             <th>Delete</th>
                         </tr>
@@ -102,8 +158,18 @@
                                         <td>
                                             {{$good->label}}
                                         </td>
-                                        <td>{{$good->pivot->consume_date}}</td>
+                                        <td>{{$mydate=$good->pivot->consume_date}}</td>
                                         <td>{{$good->pivot->amount}}</td>
+                                        @foreach($plastics as $plastic)
+                                            @if($plastic->id==$good->id)
+                                                <td>{{$plastic->biodigration_time}}</td>
+                                                <td>{{$plastic->toxic_spread_emission}}</td>
+                                                <td>{{$plastic->polyethylene_density}}</td>
+                                                <td>{{$package->size}}</td>
+                                                <span
+                                                    class="d-none">{{$total = $good->pivot->amount*($plastic->biodigration_time*$plastic->toxic_spread_emission/pow(2, 2))}}</span>
+                                            @endif
+                                        @endforeach
                                         <td>
                                             <a href="{{route('consumes.package.edit', ['good_id'=>$good->id, 'consume_date'=>$good->pivot->consume_date])}}"
                                                class="btn btn-primary">Update</a>
@@ -117,6 +183,11 @@
                                                 <button class="btn btn-danger">Delete</button>
                                             </form>
                                         </td>
+                                        @php
+                                            if($mydate!=null){
+                                                $monthValue = DateTime::createFromFormat('Y-m-d', $mydate)->format('m');
+                                                $values[$monthValue] +=$total;}
+                                        @endphp
                                     </tr>
                                 @endif
                             @endforeach
@@ -141,6 +212,7 @@
                             <th>Product Name</th>
                             <th>Consume Date</th>
                             <th>Amount</th>
+                            <th>Carbon rate</th>
                             <th>Update</th>
                             <th>Delete</th>
                         </tr>
@@ -150,6 +222,7 @@
                             <th>Product Name</th>
                             <th>Consume Date</th>
                             <th>Amount</th>
+                            <th>Carbon rate</th>
                             <th>Update</th>
                             <th>Delete</th>
                         </tr>
@@ -162,7 +235,8 @@
                                         <td>
                                             {{$good->label}}
                                         </td>
-                                        <td>{{$good->pivot->consume_date}}</td>
+                                        <td>{{$mydate = $good->pivot->consume_date}}</td>
+                                        <td>{{$meat->carbon_rate}}</td>
                                         <td>{{$good->pivot->amount}}</td>
                                         <td>
                                             <a href="{{route('consumes.meat.edit', ['good_id'=>$good->id, 'consume_date'=>$good->pivot->consume_date])}}"
@@ -177,7 +251,15 @@
                                                 <button class="btn btn-danger">Delete</button>
                                             </form>
                                         </td>
+                                        <span
+                                            class="d-none">{{$total = $good->pivot->amount*($meat->carbon_rate/3)}}</span>
                                     </tr>
+                                    @php
+                                        if($mydate!=null){
+                                            $monthValue = DateTime::createFromFormat('Y-m-d', $mydate)->format('m');
+                                            $values[$monthValue] +=$total;
+                                            }
+                                    @endphp
                                 @endif
                             @endforeach
                         @endforeach
@@ -422,33 +504,12 @@
                 <span id="public">{{$public_count}}</span>
                 <span id="alternative">{{$alternative_count}}</span>
             </div>
-            <!-- Page Heading -->
-        {{--            <h1 class="h3 mb-2 text-gray-800">Charts</h1>--}}
-        {{--            <p class="mb-4">Chart.js is a third party plugin that is used to generate the charts in this theme. The--}}
-        {{--                charts below have been customized - for further customization options, please visit the <a--}}
-        {{--                    target="_blank" href="https://www.chartjs.org/docs/latest/">official Chart.js documentation</a>.</p>--}}
-
-        <!-- Content Row -->
+            <!-- Content Row -->
             <div class="row">
 
                 <div class="col-xl-8 col-lg-7">
 
-                    <!-- Area Chart -->
-                {{--                    <div class="card shadow mb-4">--}}
-                {{--                        <div class="card-header py-3">--}}
-                {{--                            <h6 class="m-0 font-weight-bold text-primary">Area Chart</h6>--}}
-                {{--                        </div>--}}
-                {{--                        <div class="card-body">--}}
-                {{--                            <div class="chart-area">--}}
-                {{--                                <canvas id="myAreaChart"></canvas>--}}
-                {{--                            </div>--}}
-                {{--                            <hr>--}}
-                {{--                            Styling for the area chart can be found in the <code>/js/demo/chart-area-demo.js</code>--}}
-                {{--                            file.--}}
-                {{--                        </div>--}}
-                {{--                    </div>--}}
-
-                <!-- Bar Chart -->
+                    <!-- Bar Chart -->
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
                             <h6 class="m-0 font-weight-bold text-primary">Bar Chart</h6>
@@ -483,5 +544,9 @@
             </div>
 
         </div>
+
+        <script>
+            var jArray = <?php echo json_encode($values); ?>
+        </script>
     @endsection
 </x-admin-master>

@@ -1,20 +1,20 @@
 <x-admin-master>
     @section('content')
-        <h1>Editing Bottle Consume Record</h1>
-        <form action="{{route('consumes.bottle.update')}}" method="post">
+        <h1>Editing Package Consume Record</h1>
+        <form action="{{route('consumes.package.update')}}" method="post">
             @csrf
             @method('PATCH')
             <div class="form-group">
                 <label for="good_id">Bottle name</label>
                 <input type="hidden" value="{{$consume->good_id}}" name="good_id">
                 <select name="good_id_new" id="good_id" class="custom-select">
-                    @foreach($bottles as $bottle)
-                        <option value="{{$bottle->id}}"
-                        @if($bottle->id==$consume->good_id)
+                    @foreach($packages as $package)
+                        <option value="{{$package->id}}"
+                        @if($package->id==$consume->good_id)
                             {{'selected'}}
                             @endif>
                             @foreach($goods as $good)
-                                @if($bottle->id==$good->id)
+                                @if($package->id==$good->id)
                                     {{$good->label}}
                                 @endif
                             @endforeach
