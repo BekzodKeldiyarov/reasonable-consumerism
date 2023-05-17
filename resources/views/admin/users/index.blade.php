@@ -17,9 +17,6 @@
                             <th>Name</th>
                             <th>email</th>
                             <th>Registered</th>
-                            <th>Roles</th>
-                            <th>Additional permissions</th>
-                            <th>Update</th>
                             <th>Delete</th>
                         </tr>
                         </thead>
@@ -30,9 +27,6 @@
                             <th>Name</th>
                             <th>email</th>
                             <th>Registered</th>
-                            <th>Roles</th>
-                            <th>Additional permissions</th>
-                            <th>Update</th>
                             <th>Delete</th>
                         </tr>
                         </tfoot>
@@ -44,9 +38,6 @@
                                 <td>{{$user->name}}</td>
                                 <td>{{$user->email}}</td>
                                 <td>{{$user->created_at->diffForHumans()}}</td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
                                 <td>
                                     <form method="post" action="{{route('users.destroy', $user)}}">
                                         @csrf

@@ -35,7 +35,7 @@ var myBarChart = new Chart(ctx, {
     data: {
         labels: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
         datasets: [{
-            label: "Revenue",
+            label: "Emission rate",
             backgroundColor: "#4e73df",
             hoverBackgroundColor: "#2e59d9",
             borderColor: "#4e73df",
@@ -69,7 +69,7 @@ var myBarChart = new Chart(ctx, {
             yAxes: [{
                 ticks: {
                     min: 0,
-                    max: 1500,
+                    max: 12000,
                     maxTicksLimit: 5,
                     padding: 10,
                     // Include a dollar sign in the ticks
